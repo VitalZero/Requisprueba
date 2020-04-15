@@ -26,6 +26,20 @@ namespace Requisprueba
             listView1.Items.Add(lvItem);
         }
 
+        public void AddRecord(Record record)
+        {
+            ListViewItem lvItem = new ListViewItem();
+
+            lvItem.Text = record.NumRequi.ToString();
+            lvItem.SubItems.Add(record.FechaElaboracion);
+            lvItem.SubItems.Add(record.FechaSolcitud);
+            lvItem.SubItems.Add(record.FechaAutorizacion);
+            lvItem.SubItems.Add(record.Monto.ToString());
+            lvItem.SubItems.Add(record.Notas);
+
+            listView1.Items.Add(lvItem);
+        }
+
         public void EditLvItem(ListViewItem lvItem, int index)
         {
             listView1.Items[index].SubItems[5].Text = "Hola mundo!";
