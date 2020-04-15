@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Xml;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Requisprueba
@@ -69,6 +67,25 @@ namespace Requisprueba
                 }
 
                 listView1.SelectedItems[i].SubItems[3].Text = "01/01/2020";
+            }
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            XmlReader xmlReader = XmlReader.Create("http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml");
+
+            while(xmlReader.Read())
+            {
+                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "Cube"))
+                {
+                    if(xmlReader.HasAttributes && xmlReader.GetAttribute("time") == null)
+                    {
+                        ListViewItem lvItem = new ListViewItem();
+                        lvItem.Text = xmlReader.GetAttribute("currency");
+                        lvItem.SubItems.Add(xmlReader.GetAttribute("rate"));
+                        listView1.Items.Add(lvItem);
+                    }
+                }
             }
         }
     }
