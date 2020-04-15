@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace Requisprueba
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void BtnAgregar_Click(object sender, EventArgs e)
         {
-            frmAgregar forma = new frmAgregar();
+            FrmAgregar forma = new FrmAgregar();
             forma.ShowDialog(this);
         }
 
@@ -33,14 +33,20 @@ namespace Requisprueba
             listView1.Items[index].SubItems[5].Text = "Hola mundo!";
         }
 
-        private void listView1_DoubleClick(object sender, EventArgs e)
+        private void ListView1_DoubleClick(object sender, EventArgs e)
         {
-            frmAgregar forma = new frmAgregar();
+            if(listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selecciona una requisición para modificar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            FrmAgregar forma = new FrmAgregar();
             forma.SetLvItems(listView1.SelectedItems[0]);
             forma.ShowDialog(this);
         }
 
-        private void btnAutorizar_Click(object sender, EventArgs e)
+        private void BtnAutorizar_Click(object sender, EventArgs e)
         {
             int c = listView1.SelectedItems.Count;
 
@@ -52,6 +58,16 @@ namespace Requisprueba
 
             for (int i = 0; i < c; i++)
             {
+                String fechaAut = listView1.SelectedItems[i].SubItems[3].Text;
+
+                if ( fechaAut != "")
+                {
+                    MessageBox.Show("La requisición " + listView1.SelectedItems[i].SubItems[0].Text +
+                        ", ya fue autorizada el " + fechaAut, "Error");
+
+                    continue;
+                }
+
                 listView1.SelectedItems[i].SubItems[3].Text = "01/01/2020";
             }
         }

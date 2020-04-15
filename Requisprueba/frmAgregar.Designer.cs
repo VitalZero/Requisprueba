@@ -1,6 +1,6 @@
 ﻿namespace Requisprueba
 {
-    partial class frmAgregar
+    partial class FrmAgregar
     {
         /// <summary>
         /// Required designer variable.
@@ -143,7 +143,7 @@
             this.btnAceptar.TabIndex = 5;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
             // frmAgregar
             // 

@@ -10,18 +10,18 @@ using System.Windows.Forms;
 
 namespace Requisprueba
 {
-    public partial class frmAgregar : Form
+    public partial class FrmAgregar : Form
     {
         private int lvIndex;
         private bool isModifying = false;
         private ListViewItem lvTmpItem;
 
-        public frmAgregar()
+        public FrmAgregar()
         {
             InitializeComponent();
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void BtnAceptar_Click(object sender, EventArgs e)
         {
             if (!isModifying)
             {
@@ -32,11 +32,11 @@ namespace Requisprueba
                 lvItem.SubItems.Add("");
                 lvItem.SubItems.Add(txtMonto.Text);
                 lvItem.SubItems.Add(txtNotas.Text);
-                ((frmMain)this.Owner).AddLvItem(lvItem);
+                ((FrmMain)this.Owner).AddLvItem(lvItem);
             }
             else
             {
-                ((frmMain)this.Owner).EditLvItem(lvTmpItem, lvIndex);
+                ((FrmMain)this.Owner).EditLvItem(lvTmpItem, lvIndex);
             }
 
             this.Close();

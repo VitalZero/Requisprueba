@@ -1,6 +1,6 @@
 ﻿namespace Requisprueba
 {
-    partial class frmMain
+    partial class FrmMain
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -70,7 +70,7 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
+            this.listView1.DoubleClick += new System.EventHandler(this.ListView1_DoubleClick);
             // 
             // requisicion
             // 
@@ -123,7 +123,7 @@
             this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            this.btnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
             // btnAutorizar
             // 
@@ -133,7 +133,7 @@
             this.btnAutorizar.TabIndex = 3;
             this.btnAutorizar.Text = "Autorizar";
             this.btnAutorizar.UseVisualStyleBackColor = true;
-            this.btnAutorizar.Click += new System.EventHandler(this.btnAutorizar_Click);
+            this.btnAutorizar.Click += new System.EventHandler(this.BtnAutorizar_Click);
             // 
             // menuStrip1
             // 
@@ -183,18 +183,21 @@
             this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
             this.agregarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarToolStripMenuItem.Text = "Agregar";
+            this.agregarToolStripMenuItem.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
             this.modificarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Click += new System.EventHandler(this.ListView1_DoubleClick);
             // 
             // autorizarToolStripMenuItem
             // 
             this.autorizarToolStripMenuItem.Name = "autorizarToolStripMenuItem";
             this.autorizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.autorizarToolStripMenuItem.Text = "Autorizar";
+            this.autorizarToolStripMenuItem.Click += new System.EventHandler(this.BtnAutorizar_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -208,7 +211,7 @@
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             // 
             // frmMain
