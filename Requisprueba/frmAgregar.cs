@@ -25,14 +25,18 @@ namespace Requisprueba
         {
             if (!isModifying)
             {
-                ListViewItem lvItem = new ListViewItem();
-                lvItem.Text = txtRequi.Text;
-                lvItem.SubItems.Add(dtElaboracion.Text);
-                lvItem.SubItems.Add(dtSolicitud.Text);
-                lvItem.SubItems.Add("");
-                lvItem.SubItems.Add(txtMonto.Text);
-                lvItem.SubItems.Add(txtNotas.Text);
-                ((FrmMain)this.Owner).AddLvItem(lvItem);
+                Record record = new Record(Convert.ToInt32(txtRequi.Text), dtElaboracion.Text, dtSolicitud.Text, "",
+                    Convert.ToDouble(txtMonto.Text), txtNotas.Text);
+
+                //ListViewItem lvItem = new ListViewItem();
+                //lvItem.Text = txtRequi.Text;
+                //lvItem.SubItems.Add(dtElaboracion.Text);
+                //lvItem.SubItems.Add(dtSolicitud.Text);
+                //lvItem.SubItems.Add("");
+                //lvItem.SubItems.Add(txtMonto.Text);
+                //lvItem.SubItems.Add(txtNotas.Text);
+                //((FrmMain)this.Owner).AddLvItem(lvItem);
+                ((FrmMain)this.Owner).AddRecord(record);
             }
             else
             {

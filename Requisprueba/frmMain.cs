@@ -32,12 +32,22 @@ namespace Requisprueba
 
             lvItem.Text = record.NumRequi.ToString();
             lvItem.SubItems.Add(record.FechaElaboracion);
-            lvItem.SubItems.Add(record.FechaSolcitud);
+            lvItem.SubItems.Add(record.FechaSolicitud);
             lvItem.SubItems.Add(record.FechaAutorizacion);
             lvItem.SubItems.Add(record.Monto.ToString());
             lvItem.SubItems.Add(record.Notas);
 
             listView1.Items.Add(lvItem);
+
+            XmlWriter xmlWriter = XmlWriter.Create("datos.xml");
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("requisiciones");
+            xmlWriter.WriteStartElement("requisicion");
+            xmlWriter.WriteAttributeString("numero", "22315");
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
         }
 
         public void EditLvItem(ListViewItem lvItem, int index)
@@ -86,21 +96,21 @@ namespace Requisprueba
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            XmlReader xmlReader = XmlReader.Create("http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml");
+            //XmlReader xmlReader = XmlReader.Create("http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml");
 
-            while(xmlReader.Read())
-            {
-                if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "Cube"))
-                {
-                    if(xmlReader.HasAttributes && xmlReader.GetAttribute("time") == null)
-                    {
-                        ListViewItem lvItem = new ListViewItem();
-                        lvItem.Text = xmlReader.GetAttribute("currency");
-                        lvItem.SubItems.Add(xmlReader.GetAttribute("rate"));
-                        listView1.Items.Add(lvItem);
-                    }
-                }
-            }
+            //while (xmlReader.Read())
+            //{
+            //    if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "Cube"))
+            //    {
+            //        if (xmlReader.HasAttributes && xmlReader.GetAttribute("time") == null)
+            //        {
+            //            ListViewItem lvItem = new ListViewItem();
+            //            lvItem.Text = xmlReader.GetAttribute("currency");
+            //            lvItem.SubItems.Add(xmlReader.GetAttribute("rate"));
+            //            listView1.Items.Add(lvItem);
+            //        }
+            //    }
+            //}
         }
     }
 }
