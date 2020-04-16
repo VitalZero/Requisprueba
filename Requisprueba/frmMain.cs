@@ -37,7 +37,7 @@ namespace Requisprueba
             lvItem.SubItems.Add(record.FechaElaboracion);
             lvItem.SubItems.Add(record.FechaSolicitud);
             lvItem.SubItems.Add(record.FechaAutorizacion);
-            lvItem.SubItems.Add(record.Monto.ToString());
+            lvItem.SubItems.Add(string.Format("{0:c}", record.Monto));
             lvItem.SubItems.Add(record.Notas);
 
             listView1.Items.Add(lvItem);
@@ -66,11 +66,17 @@ namespace Requisprueba
             dataNode.InnerText = record.FechaSolicitud;
             childNode.AppendChild(dataNode);
 
-            dataNode = doc.CreateElement("autorización");
+            dataNode = doc.CreateElement("autorizacion");
+            attribute = doc.CreateAttribute("aut");
+            attribute.Value = "0";
+            dataNode.Attributes.Append(attribute);
             childNode.AppendChild(dataNode);
 
             dataNode = doc.CreateElement("monto");
             dataNode.InnerText = record.Monto.ToString();
+            attribute = doc.CreateAttribute("iva");
+            attribute.Value = record.Iva.ToString();
+            dataNode.Attributes.Append(attribute);
             childNode.AppendChild(dataNode);
 
             dataNode = doc.CreateElement("notas");
@@ -145,6 +151,11 @@ namespace Requisprueba
                         lvItem.Text = node.Attributes["num"].Value;
                         lvItem.SubItems.Add(node.ChildNodes[0].InnerText);
                         lvItem.SubItems.Add(node.ChildNodes[1].InnerText);
+                        lvItem.SubItems.Add(node.ChildNodes[2].InnerText);
+
+                        string formatted = string.Format("{0:c}", Convert.ToDouble(node.ChildNodes[3].InnerText));
+                        lvItem.SubItems.Add(formatted);
+                        lvItem.SubItems.Add(node.ChildNodes[4].InnerText);
 
                         listView1.Items.Add(lvItem);
                     }
@@ -178,6 +189,11 @@ namespace Requisprueba
             //        }
             //    }
             //}
+        }
+
+        private void Salir_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

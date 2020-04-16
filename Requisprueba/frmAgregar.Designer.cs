@@ -40,6 +40,8 @@
             this.dtSolicitud = new System.Windows.Forms.DateTimePicker();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.chkIva = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txtRequi
@@ -97,17 +99,17 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(9, 48);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 13);
+            this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Requisicion";
+            this.label5.Text = "Notas";
             // 
             // txtNotas
             // 
             this.txtNotas.Location = new System.Drawing.Point(9, 64);
             this.txtNotas.Multiline = true;
             this.txtNotas.Name = "txtNotas";
-            this.txtNotas.Size = new System.Drawing.Size(355, 68);
-            this.txtNotas.TabIndex = 4;
+            this.txtNotas.Size = new System.Drawing.Size(410, 37);
+            this.txtNotas.TabIndex = 5;
             // 
             // dtElaboracion
             // 
@@ -128,29 +130,52 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(288, 138);
+            this.btnCancelar.Location = new System.Drawing.Point(344, 107);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(207, 138);
+            this.btnAceptar.Location = new System.Drawing.Point(263, 107);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 5;
+            this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
-            // frmAgregar
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(370, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "I.V.A.";
+            // 
+            // chkIva
+            // 
+            this.chkIva.AutoSize = true;
+            this.chkIva.Checked = true;
+            this.chkIva.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIva.Location = new System.Drawing.Point(373, 25);
+            this.chkIva.Name = "chkIva";
+            this.chkIva.Size = new System.Drawing.Size(46, 17);
+            this.chkIva.TabIndex = 4;
+            this.chkIva.Text = "16%";
+            this.chkIva.UseVisualStyleBackColor = true;
+            // 
+            // FrmAgregar
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 171);
+            this.ClientSize = new System.Drawing.Size(431, 139);
+            this.Controls.Add(this.chkIva);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.dtSolicitud);
@@ -163,7 +188,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtRequi);
-            this.Name = "frmAgregar";
+            this.Name = "FrmAgregar";
             this.Text = "Agregar Requisición";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -184,5 +209,7 @@
         private System.Windows.Forms.DateTimePicker dtSolicitud;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox chkIva;
     }
 }

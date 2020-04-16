@@ -36,7 +36,7 @@
             this.autorizacion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.monto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nota = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboFiltro = new System.Windows.Forms.ComboBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnAutorizar = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -49,6 +49,10 @@
             this.autorizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +69,7 @@
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(12, 56);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(573, 387);
             this.listView1.TabIndex = 0;
@@ -102,22 +107,22 @@
             this.nota.Text = "Nota";
             this.nota.Width = 200;
             // 
-            // comboBox1
+            // cboFiltro
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Todos",
-            "Sin autorizar",
-            "Autorizados"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 27);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.Text = "Ver requisiciones";
+            this.cboFiltro.FormattingEnabled = true;
+            this.cboFiltro.Items.AddRange(new object[] {
+            "Todas",
+            "Autorizadas",
+            "SinAutorizar"});
+            this.cboFiltro.Location = new System.Drawing.Point(498, 29);
+            this.cboFiltro.Name = "cboFiltro";
+            this.cboFiltro.Size = new System.Drawing.Size(87, 21);
+            this.cboFiltro.TabIndex = 1;
+            this.cboFiltro.Text = "Todas";
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(139, 27);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 27);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 2;
@@ -127,7 +132,7 @@
             // 
             // btnAutorizar
             // 
-            this.btnAutorizar.Location = new System.Drawing.Point(220, 27);
+            this.btnAutorizar.Location = new System.Drawing.Point(93, 27);
             this.btnAutorizar.Name = "btnAutorizar";
             this.btnAutorizar.Size = new System.Drawing.Size(75, 23);
             this.btnAutorizar.TabIndex = 3;
@@ -150,6 +155,7 @@
             // archivoToolStripMenuItem
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importarToolStripMenuItem,
             this.exportarACSVToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
@@ -159,43 +165,45 @@
             // exportarACSVToolStripMenuItem
             // 
             this.exportarACSVToolStripMenuItem.Name = "exportarACSVToolStripMenuItem";
-            this.exportarACSVToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.exportarACSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportarACSVToolStripMenuItem.Text = "Exportar a CSV";
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.Salir_Click);
             // 
             // requisicionesToolStripMenuItem
             // 
             this.requisicionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarToolStripMenuItem,
             this.modificarToolStripMenuItem,
-            this.autorizarToolStripMenuItem});
+            this.autorizarToolStripMenuItem,
+            this.eliminarToolStripMenuItem});
             this.requisicionesToolStripMenuItem.Name = "requisicionesToolStripMenuItem";
-            this.requisicionesToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
-            this.requisicionesToolStripMenuItem.Text = "Requisiciones";
+            this.requisicionesToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.requisicionesToolStripMenuItem.Text = "Editar";
             // 
             // agregarToolStripMenuItem
             // 
             this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarToolStripMenuItem.Text = "Agregar";
             this.agregarToolStripMenuItem.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.modificarToolStripMenuItem.Text = "Modificar";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.ListView1_DoubleClick);
             // 
             // autorizarToolStripMenuItem
             // 
             this.autorizarToolStripMenuItem.Name = "autorizarToolStripMenuItem";
-            this.autorizarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.autorizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.autorizarToolStripMenuItem.Text = "Autorizar";
             this.autorizarToolStripMenuItem.Click += new System.EventHandler(this.BtnAutorizar_Click);
             // 
@@ -214,15 +222,47 @@
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             // 
+            // importarToolStripMenuItem
+            // 
+            this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importarToolStripMenuItem.Text = "Importar CSV";
+            // 
+            // eliminarToolStripMenuItem
+            // 
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(174, 27);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 5;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(460, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Filtar:";
+            // 
             // FrmMain
             // 
             this.AcceptButton = this.btnAgregar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 455);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAutorizar);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cboFiltro);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -248,7 +288,7 @@
         private System.Windows.Forms.ColumnHeader autorizacion;
         private System.Windows.Forms.ColumnHeader monto;
         private System.Windows.Forms.ColumnHeader nota;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboFiltro;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnAutorizar;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -261,6 +301,10 @@
         private System.Windows.Forms.ToolStripMenuItem autorizarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Label label1;
     }
 }
 

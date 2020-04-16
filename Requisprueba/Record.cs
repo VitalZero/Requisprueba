@@ -15,12 +15,13 @@ namespace Requisprueba
         //private double monto;
         //private string notas;
 
-        public Record(int requi, string fechaElab, string fechaSol, string fechaAut, double mont, string not)
+        public Record(int requi, string fechaElab, string fechaSol, string fechaAut, int iva, double mont, string not)
         {
             NumRequi = requi;
             FechaElaboracion = fechaElab;
             FechaSolicitud = fechaSol;
             FechaAutorizacion = fechaAut;
+            Iva = iva;
             Monto = mont;
             Notas = not;
         }
@@ -29,6 +30,7 @@ namespace Requisprueba
         public string FechaElaboracion { get; set; }
         public string FechaSolicitud { get; set; }
         public string FechaAutorizacion { get; set; }
+        public int Iva { get; set; }
         public double Monto { get; set; }
         public string Notas { get; set; }
     }

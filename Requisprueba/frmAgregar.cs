@@ -25,8 +25,12 @@ namespace Requisprueba
         {
             if (!isModifying)
             {
+                int iva = 0;
+                if (chkIva.Checked)
+                    iva = 16;
+
                 Record record = new Record(Convert.ToInt32(txtRequi.Text), dtElaboracion.Text, dtSolicitud.Text, "",
-                    Convert.ToDouble(txtMonto.Text), txtNotas.Text);
+                    iva, Convert.ToDouble(txtMonto.Text), txtNotas.Text);
 
                 //ListViewItem lvItem = new ListViewItem();
                 //lvItem.Text = txtRequi.Text;
