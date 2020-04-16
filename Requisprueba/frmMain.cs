@@ -5,11 +5,14 @@ using System.Data;
 using System.Xml;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Requisprueba
 {
     public partial class FrmMain : Form
     {
+        private XmlDocument doc;
+
         public FrmMain()
         {
             InitializeComponent();
@@ -39,15 +42,44 @@ namespace Requisprueba
 
             listView1.Items.Add(lvItem);
 
-            XmlWriter xmlWriter = XmlWriter.Create("datos.xml");
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement("requisiciones");
-            xmlWriter.WriteStartElement("requisicion");
-            xmlWriter.WriteAttributeString("numero", "22315");
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
+            //XmlWriter xmlWriter = XmlWriter.Create("datos.xml");
+            //xmlWriter.WriteStartDocument();
+            //xmlWriter.WriteStartElement("requisiciones");
+            //xmlWriter.WriteStartElement("requisicion");
+            //xmlWriter.WriteAttributeString("numero", "22315");
+            //xmlWriter.WriteEndElement();
+            //xmlWriter.WriteEndElement();
+            //xmlWriter.WriteEndDocument();
+            //xmlWriter.Close();
+            XmlNode rootNode = doc.GetElementsByTagName("requisiciones")[0];
+
+            XmlNode childNode = doc.CreateElement("requisicion");
+            XmlAttribute attribute = doc.CreateAttribute("num");
+            attribute.Value = record.NumRequi.ToString();
+            childNode.Attributes.Append(attribute);
+
+            XmlNode dataNode = doc.CreateElement("elaboracion");
+            dataNode.InnerText = record.FechaElaboracion;
+            childNode.AppendChild(dataNode);
+
+            dataNode = doc.CreateElement("solicitud");
+            dataNode.InnerText = record.FechaSolicitud;
+            childNode.AppendChild(dataNode);
+
+            dataNode = doc.CreateElement("autorización");
+            childNode.AppendChild(dataNode);
+
+            dataNode = doc.CreateElement("monto");
+            dataNode.InnerText = record.Monto.ToString();
+            childNode.AppendChild(dataNode);
+
+            dataNode = doc.CreateElement("notas");
+            dataNode.InnerText = record.Notas;
+            childNode.AppendChild(dataNode);
+
+            rootNode.AppendChild(childNode);
+
+            doc.Save("datos.xml");
         }
 
         public void EditLvItem(ListViewItem lvItem, int index)
@@ -96,6 +128,41 @@ namespace Requisprueba
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            doc = new XmlDocument();
+
+            if (File.Exists("datos.xml"))
+            {
+                try
+                {
+                    doc.Load("datos.xml");
+
+                    XmlNodeList nodeList = doc.GetElementsByTagName("requisicion");
+
+                    foreach (XmlNode node in nodeList)
+                    {
+                        ListViewItem lvItem = new ListViewItem();
+
+                        lvItem.Text = node.Attributes["num"].Value;
+                        lvItem.SubItems.Add(node.ChildNodes[0].InnerText);
+                        lvItem.SubItems.Add(node.ChildNodes[1].InnerText);
+
+                        listView1.Items.Add(lvItem);
+                    }
+                }
+                catch (XmlException ex)
+                {
+                }
+            }
+            else
+            {
+                XmlDeclaration decl = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+                doc.AppendChild(decl);
+
+                XmlNode rootNode = doc.CreateElement("requisiciones");
+                doc.AppendChild(rootNode);
+                doc.Save("datos.xml");
+            }
+            
             //XmlReader xmlReader = XmlReader.Create("http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml");
 
             //while (xmlReader.Read())
