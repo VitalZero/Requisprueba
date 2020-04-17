@@ -53,22 +53,29 @@ namespace Requisprueba
             //xmlWriter.Close();
             XmlNode rootNode = doc.GetElementsByTagName("requisiciones")[0];
 
-            XmlNode childNode = doc.CreateElement("requisicion");
-            XmlAttribute attribute = doc.CreateAttribute("id");
+            XmlNode childNode = doc.CreateElement("requi");
+            XmlAttribute attribute = doc.CreateAttribute("num");
             attribute.Value = record.NumRequi.ToString();
             childNode.Attributes.Append(attribute);
 
-            XmlNode dataNode = doc.CreateElement("elaboracion");
-            dataNode.InnerText = record.FechaElaboracion;
+            XmlNode dataNode = doc.CreateElement("elab");
+            attribute = doc.CreateAttribute("fecha");
+            attribute.Value = record.FechaElaboracion;
+            dataNode.Attributes.Append(attribute);
             childNode.AppendChild(dataNode);
 
-            dataNode = doc.CreateElement("solicitud");
-            dataNode.InnerText = record.FechaSolicitud;
+            dataNode = doc.CreateElement("sol");
+            attribute = doc.CreateAttribute("fecha");
+            attribute.Value = record.FechaSolicitud;
+            dataNode.Attributes.Append(attribute);
             childNode.AppendChild(dataNode);
 
-            dataNode = doc.CreateElement("autorizacion");
-            attribute = doc.CreateAttribute("aut");
+            dataNode = doc.CreateElement("aut");
+            attribute = doc.CreateAttribute("val");
             attribute.Value = "0";
+            dataNode.Attributes.Append(attribute);
+            attribute = doc.CreateAttribute("fecha");
+            attribute.Value = "";
             dataNode.Attributes.Append(attribute);
             childNode.AppendChild(dataNode);
 
@@ -129,14 +136,14 @@ namespace Requisprueba
                 }
                 string today = DateTime.Today.ToString("d");
 
-                XmlNodeList nodeList = doc.GetElementsByTagName("requisicion");
+                XmlNodeList nodeList = doc.GetElementsByTagName("requi");
 
                 foreach(XmlNode node in nodeList)
                 {
                     if(node.Attributes["num"].Value == listView1.SelectedItems[i].SubItems[0].Text)
                     {
-                        node.ChildNodes[2].Attributes["aut"].Value = "1";
-                        node.ChildNodes[2].InnerText = today;
+                        node.ChildNodes[2].Attributes["val"].Value = "1";
+                        node.ChildNodes[2].Attributes["fecha"].Value = today;
                         listView1.SelectedItems[i].SubItems[3].Text = today;
                         break;
                     }
@@ -155,16 +162,16 @@ namespace Requisprueba
                 {
                     doc.Load("datos.xml");
 
-                    XmlNodeList nodeList = doc.GetElementsByTagName("requisicion");
+                    XmlNodeList nodeList = doc.GetElementsByTagName("requi");
 
                     foreach (XmlNode node in nodeList)
                     {
                         ListViewItem lvItem = new ListViewItem();
 
                         lvItem.Text = node.Attributes["num"].Value;
-                        lvItem.SubItems.Add(node.ChildNodes[0].InnerText);
-                        lvItem.SubItems.Add(node.ChildNodes[1].InnerText);
-                        lvItem.SubItems.Add(node.ChildNodes[2].InnerText);
+                        lvItem.SubItems.Add(node.ChildNodes[0].Attributes["fecha"].Value);
+                        lvItem.SubItems.Add(node.ChildNodes[1].Attributes["fecha"].Value);
+                        lvItem.SubItems.Add(node.ChildNodes[2].Attributes["fecha"].Value);
 
                         string formatted = string.Format("{0:c}", Convert.ToDouble(node.ChildNodes[3].InnerText));
                         lvItem.SubItems.Add(formatted);
