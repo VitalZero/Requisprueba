@@ -54,7 +54,7 @@ namespace Requisprueba
             XmlNode rootNode = doc.GetElementsByTagName("requisiciones")[0];
 
             XmlNode childNode = doc.CreateElement("requisicion");
-            XmlAttribute attribute = doc.CreateAttribute("num");
+            XmlAttribute attribute = doc.CreateAttribute("id");
             attribute.Value = record.NumRequi.ToString();
             childNode.Attributes.Append(attribute);
 
@@ -127,9 +127,22 @@ namespace Requisprueba
 
                     continue;
                 }
+                string today = DateTime.Today.ToString("d");
 
-                listView1.SelectedItems[i].SubItems[3].Text = "01/01/2020";
+                XmlNodeList nodeList = doc.GetElementsByTagName("requisicion");
+
+                foreach(XmlNode node in nodeList)
+                {
+                    if(node.Attributes["num"].Value == listView1.SelectedItems[i].SubItems[0].Text)
+                    {
+                        node.ChildNodes[2].Attributes["aut"].Value = "1";
+                        node.ChildNodes[2].InnerText = today;
+                        listView1.SelectedItems[i].SubItems[3].Text = today;
+                        break;
+                    }
+                }
             }
+            doc.Save("datos.xml");
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
